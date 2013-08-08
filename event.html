@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>javascript event</title>
+    <style type="text/css">
+      span {
+        background-color: #31bb99;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="text-flow" ></div>
+    
+    <div onclick="clickon('div')">
+      <p onclick="clickon('p')">
+        <span onclick="clickon('span')">click me</span>
+      </p>
+    </div>
+
+<!-- event  -->
+    <input type="button" value="welcome" onclick="alert(this.value)">
+    <input type="button" value="where are you from" onclick="alert(value)">
+    <form method="post">
+      <input type="text" name="username" value="">
+      <input type="button" value="Howard" onclick="alert(username.value)">
+    </form>
+    <script>
+      // IE7-8/FF/Chrome result is: span-p-div
+      function clickon(element){
+        alert("you click on: " + element);
+      }
+    </script>
+  </body>
+</html>
