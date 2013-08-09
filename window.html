@@ -4,9 +4,7 @@
   <title> </title>
   </head>
   <body>
-    <p id="demo">
-    ...
-    </p>
+    <p id="demo">  ... </p>
     <div id="products">
     <div id="product1">product1</div>
     <div>product2</div>
@@ -15,85 +13,79 @@
     <input type="button" value="append a new product" onclick="addProduct();">
     <input type="button" value="insert a new product before1" onclick="insertProduct();">
     <script type="text/javascript">
-    // var w_chrome_ff = window.innerWidth;
-    // var w_ie = document.documentElement.clientWidth;
-    // var h_ie = document.documentElement.clientHeight;
-    // var w_ie7 = document.body.clientWidth;
-    var page_width = window.innerWidth,
-    page_height = window.innerHeight;
-    // what is compatMode
-    if(typeof page_width != 'number'){
-    // what is document.compatmode
-    // "BackCompat" for Quirks mode or "CSS1Compat" for Strict mod
-      if(document.compatMode == "CSS1Compat"){
-        page_width = document.documentElement.clientWidth;
-        page_height = document.documentElement.clientHeight;
+      var page_width = window.innerWidth,
+          page_height = window.innerHeight;
+      if(typeof page_width != 'number'){
+      // what is document.compatmode
+      // "BackCompat" for Quirks mode or "CSS1Compat" for Strict mod
+        if(document.compatMode == "CSS1Compat"){
+          page_width = document.documentElement.clientWidth;
+          page_height = document.documentElement.clientHeight;
+        }
+        else{
+          page_width = document.body.clientWidth;
+          page_height = document.body.clientHeight;
+        }
       }
-      else{
-        page_width = document.body.clientWidth;
-        page_height = document.body.clientHeight;
+
+      x = document.getElementById("demo");
+      x.innerHTML = "Browser inner window width: " + page_width;
+      x.innerHTML += "<br>Browser inner window height: " + page_height;
+      
+      function openWin(){
+        // open(), 4 parameters, (url, name, attribute ,replace) 
+        // myWindow = window.open('http://www.google.com.au','myWindow', 'width=200, height=100');
+        myWindow = window.open('','', 'width=200, height=100');
+        myWindow.document.write("<p>This is 'myWindow'</p>");
+        /*
+        //not work
+        setTimeout(moveWin(), 3000); 
+        //work well
+        setTimeout(function(){myWindow.resizeTo(500, 500);}, 3000); 
+        */
+        setTimeout(function(){myWindow.resizeTo(500, 500);}, 3000);
+        setInterval(function(){myWindow.moveTo(0, 0);}, 3000);
+        // setTimeout(function(){myWindow.close();}, 3000);
       }
-    }
 
+      function moveWin(){
+      // IE/ff/chrome only work well on new window you create, it doent work on parent window. 
+        myWindow.moveTo(300,0);
+      }
 
-    x = document.getElementById("demo");
-    x.innerHTML = "Browser inner window width: " + page_width;
-    x.innerHTML += "<br>Browser inner window height: " + page_height;
-    function openWin(){
-      // open(), 4 parameters, (url, name, attribute ,replace) 
-      // myWindow = window.open('http://www.google.com.au','myWindow', 'width=200, height=100');
-      myWindow = window.open('','', 'width=200, height=100');
-      myWindow.document.write("<p>This is 'myWindow'</p>");
-      /*
-      //not work
-      setTimeout(moveWin(), 3000); 
-      //work well
-      setTimeout(function(){myWindow.resizeTo(500, 500);}, 3000); 
-      */
-      setTimeout(function(){myWindow.resizeTo(500, 500);}, 3000);
-      setInterval(function(){myWindow.moveTo(0, 0);}, 3000);
-      // setTimeout(function(){myWindow.close();}, 3000);
-    }
+      function resizeWin(){
+        myWindow.resizeTo(500, 200);
+      }
 
-    function moveWin(){
-    // IE
-    // ff/chrome only work well on new window you create, it doent work on parent window. 
-      myWindow.moveTo(300,0);
-    }
+      // childNodes: the first and the last are same: '#text', not null 
+      // previousSibling: the first child and the last child are '#text', not null
 
-    function resizeWin(){
-      myWindow.resizeTo(500, 200);
-    }
+      // different saying in book: <Professional javascript for web developer> Page-250 not mention '#text'
+      x.innerHTML += "<br>products have child: " + document.getElementById("products").hasChildNodes();
+      x.innerHTML += "<br>products child: " + document.getElementById("products").childNodes;
+      x.innerHTML += "<br>products child[0]: " + document.getElementById("products").childNodes[0];
+      x.innerHTML += "<br>products child[1]: " + document.getElementById("products").childNodes[1];
+      x.innerHTML += "<br>products child[2]: " + document.getElementById("products").childNodes[2];
+      x.innerHTML += "<br>products previousSibling: " + document.getElementById("products").previousSibling;
+      x.innerHTML += "<br>products nextSibling: " + document.getElementById("products").nextSibling;
+      
+      var products = document.getElementById("products");
+      var product1 = document.getElementById("product1");
+      function addProduct(){
+        var product3 = document.createElement("div");
+        var product3_detail = document.createTextNode("product3 appened by js");
+        product3.appendChild(product3_detail);
+        products.appendChild(product3);
+      }
 
-    // childNodes: the first and the last are same: '#text', not null 
-    // previousSibling: the first child and the last child are '#text', not null
-
-    // different saying in book: <Professional javascript for web developer> P250 not mention '#text'
-    x.innerHTML += "<br>products have child: " + document.getElementById("products").hasChildNodes();
-    x.innerHTML += "<br>products child: " + document.getElementById("products").childNodes;
-    x.innerHTML += "<br>products child[0]: " + document.getElementById("products").childNodes[0];
-    x.innerHTML += "<br>products child[1]: " + document.getElementById("products").childNodes[1];
-    x.innerHTML += "<br>products child[2]: " + document.getElementById("products").childNodes[2];
-    x.innerHTML += "<br>products previousSibling: " + document.getElementById("products").previousSibling;
-    x.innerHTML += "<br>products nextSibling: " + document.getElementById("products").nextSibling;
-    var products = document.getElementById("products");
-    var product1 = document.getElementById("product1");
-    function addProduct(){
-      var product3 = document.createElement("div");
-      var product3_detail = document.createTextNode("product3 appened by js");
-      product3.appendChild(product3_detail);
-      products.appendChild(product3);
-    }
-
-    function insertProduct(){
-      var product0 = document.createElement("div");
-      product0.appendChild(document.createTextNode("product0 inserted before product1"));
-      products.insertBefore(product0, product1);
-    }
+      function insertProduct(){
+        var product0 = document.createElement("div");
+        product0.appendChild(document.createTextNode("product0 inserted before product1"));
+        products.insertBefore(product0, product1);
+      }
 
     </script>
 
   </body>
-
 </html>
 
