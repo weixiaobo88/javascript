@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div>
+    Using window leftPos and topPos
+    <button onclick="move()">move the window</button>
+  </div>
+  <script type="text/javascript">
+    var leftPos = (typeof window.screenLeft == 'number') ? window.screenLeft : window.screenX;
+    var topPos = (typeof window.screenTop == 'number') ? window.screenTop : window.screenY;
+    
+    function move(){
+      alert("moveBy() moveTo() are disabled by the browser");
+      window.moveBy(100,200); 
+    }
+    console.log("leftPos is " + leftPos);
+    console.log("topPos is " + topPos);
+  </script>
+</body>
+</html>
