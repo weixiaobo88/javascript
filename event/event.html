@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <title>javascript event</title>
+    <style type="text/css">
+      span {
+        background-color: #31bb99;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="text-flow" ></div>
+    
+    <div onclick="clickon('div')">
+      <p onclick="clickon('p')">
+        <span onclick="clickon('span')">click me</span>
+      </p>
+    </div>
+    
+    <div id="trigger_div" >
+      <p id="trigger_p">
+        <span id="trigger_span">click using listener</span>
+      </p>
+    </div>
+
+<!--
+    <div id="trigger_div" >
+      <p id="trigger_p">
+        <span id="trigger_span">traditional event registration: bubble</span>
+      </p>
+    </div> -->
+
+    <!-- html event scope -->
+
+    <input type="button" value="welcome" onclick="alert(this.value)">
+    <input type="button" value="where are you from" onclick="alert(value)">
+    <form method="post">
+      <input type="text" name="username" value="">
+      <input type="button" value="Howard" onclick="alert(username.value)">
+    </form>
+
+    
+    <script>
+      // IE7-8/FF/Chrome result is: span-p-div
+      function clickon(element){
+        alert("you click on: " + element);
+      }
+
+      var trigger_div = document.getElementById("trigger_div"),
+        trigger_p = document.getElementById("trigger_p"),
+        trigger_span = document.getElementById("trigger_span");
+
+      // trigger_div.addEventListener("click", triggerDiv, true);
+      // // trigger_div.addEventListener("click", triggerDiv, false);
+      // trigger_p.addEventListener("click", triggerP, false);
+      // trigger_span.addEventListener("click", triggerSpan, false);
+
+      trigger_div.addEventListener("click", doSomething, true);
+      trigger_p.addEventListener("click", doSomething, false);
+      trigger_span.addEventListener("click", doSomething, false);
+
+
+      // traditional registration: bublle
+      // trigger_div.onclick = triggerDiv;
+      // trigger_p.onclick = triggerP;
+      // trigger_span.onclick = triggerSpan;
+
+      function doSomething(e){
+        if (!e) {alert(e.srcElemnt)} //Microsoft don't solve the problem
+        else {alert(e.currentTarget);}
+      }
+      // function triggerDiv(){
+      //   alert(trigger_div);
+      // }      
+      // function triggerP(){
+      //   alert(trigger_p);
+      // }
+      // function triggerSpan(){
+      //   alert(trigger_span);
+      // }
+
+      // drag and move
+
+      // to turn off all capturing and bubbling
+      // function triggerP(e){
+      //   if (!e) { var e = window.event };
+      //   e.cancelBublle = true;
+      //   if (e.stopPropagation) { e.stopPropagation()};
+      // }
+    </script>
+  </body>
+</html>

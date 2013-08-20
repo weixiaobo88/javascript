@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>javascript event</title>
+    <style type="text/css">
+      #drag {
+        background-color: #31bb99;
+        width: 150px;
+        height: 140px;
+        text-align: center;
+        position: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="drag" >hi, drag me</div>
+
+
+
+    
+    <script>
+
+      var drag = document.getElementById("drag");
+
+      drag.addEventListener("mouseover", over, false);
+      drag.addEventListener("mouseout", out, false);
+      drag.addEventListener("mousedown", down, false);
+      // drag.addEventListener("mouseup", up, false);
+
+
+      function doSomething(e){
+        if (!e) {alert(e.srcElemnt)} //Microsoft don't solve the problem
+        else {alert(e.currentTarget);}
+      }
+      function over(e){
+        if (!e) {alert(e.srcElemnt)} //Microsoft don't solve the problem
+        else { e.currentTarget.style.backgroundColor = '#31bb11'; }
+      }
+      function out(e){
+        if (!e) {alert(e.srcElemnt)} //Microsoft don't solve the problem
+        else { e.currentTarget.style.backgroundColor = '#31bb99'; }
+      }
+      function down(e){
+        if (!e) {alert(e.srcElemnt)} //Microsoft don't solve the problem
+        else { 
+          e.currentTarget.style.backgroundColor = 'red'; 
+          e.currentTarget.top = "110px";
+        }
+      }
+
+
+
+
+
+      // drag and move
+
+      // to turn off all capturing and bubbling
+      // function triggerP(e){
+      //   if (!e) { var e = window.event };
+      //   e.cancelBublle = true;
+      //   if (e.stopPropagation) { e.stopPropagation()};
+      // }
+    </script>
+  </body>
+</html>

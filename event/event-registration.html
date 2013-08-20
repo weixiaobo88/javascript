@@ -1,0 +1,77 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <button name="demo" onclick="alert('I have been clicked!')"> click me</button>
+    <button name="demo" onClick="doSomething()"> click me</button>
+    <br><br>
+
+    <a href="http://google.com" onClick="doSomething()">check log</a>
+    <a href="http://google.com" onClick="doSomething(); return false;">redirect?</a>
+    <a href="http://google.com" onMouseOver="window.status = 'This link goes google'; return true">cant change window.status</a>
+    <br><br>
+
+    <a href="http://google.com" class="print">hello</a>
+    <a href="http://google.com" class="print">hello</a>
+    <a href="http://google.com" class="print">hello</a>
+    <a href="http://google.com" id="print">welcome</a>
+    <br><br>
+  
+    <a href="http://google.com" id="click1">click1</a>
+
+    <br><br>
+    <a href="http://google.com" id="event_type">click to check the event type</a>
+
+    <script>
+
+      var hello = document.getElementsByClassName("print");
+      var click = document.getElementById("click1");
+      
+      var event_type = document.getElementById("event_type");
+
+      // 给多个元素绑定相同事件时，要使用循环，挨个绑定
+      for (var i = hello.length - 1; i >= 0; i--) {
+        hello[i].onclick = printInConsole;
+        // 当绑定一个简单的事件处理函数时，可以采用匿名函数        
+        // hello[i].onclick = function(){
+        //   this.style.background = '#aa55aa';
+        //   return false;
+        // };
+      };
+
+      document.getElementById("print").onclick = printInConsole;
+
+      // chrome 会执行默认行为，Firefox会阻止默认行为,但是页面会一直加载请求访问google的网站
+      // 为什么会这样？
+      click.addEventListener('click', printClick, false);
+      click.addEventListener('click', printInConsole, false);
+      click.removeEventListener('click', printClick, false);
+
+      event_type.onclick = doAnother;
+
+      function doAnother(e){
+        if (!e){ e = window.event;};
+        if (e.target) {targ = e.target}
+        else  if (e.srcElement) {targ = e.srcElement};
+        if (targ.nodeType == 3) {targ = targ.parentNode;};
+        alert("Event type is : " + e.type + " target is : " + targ);
+        return false;
+      }
+
+      function doSomething(){
+        console.log("you have click a tag: ");
+      }
+
+      function printInConsole(){
+        this.style.background = '#aa55aa';
+        return false;
+      }
+      function printClick(){
+        this.preventDefault();
+        setTimeout(function(){ console.log("click doSomething");}, 3000);
+        return false; 
+      }
+
+    </script>
+  </body>
+</html>
