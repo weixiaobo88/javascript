@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <style>
+      #title { color: red; }
+    </style>
+  </head>
+  <body>
+    <div id="title">change the style of the content</div>
+    <button onClick="changeStyle()">click me</button>
+    
+    <script>
+      function changeStyle(){
+        var element = document.getElementById('title');
+        alert(element.style.color);
+        // element.style.color = "#bf761d";
+        // element.style.background = '#ccc';
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <style>
+      .console-log {
+        color: #31bb99;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="title">
+      check the log, it will show in Chrom/FF
+      <p class="console-log">Uncaught ReferenceError: myVariable is not defined </p>
+    </div>
+    
+    <script>
+      function myFunction(){
+        var myVariable = 'inside'; //local variable
+      }
+      console.log(myVariable); //'undefied'
+
+      var myVariable = 'outside'; //global variable
+      myFunction();
+      console.log(myVariable); //'outside'
+
+      function myFunction2(){
+        myVariable = 'inside';  //global varabile
+        console.log('funciton2: ' + myVariable);
+      }
+      var myVariable = 'outside'; //global varabile
+      myFunction2();
+      console.log(myVariable); //'inside'
+    </script>
+  </body>
+</html>

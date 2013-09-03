@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <hr>
+    <div class="steps">
+      Steps for an AngularJS app
+      <ul>
+        <li>ng-app="myApp"</li>
+        <li>ng-model="yourName"</li>
+        <li><span ng-non-bindable="">{{ yourName }}</span></li>
+      </ul>
+      <input type="text" ng-model="yourName" placeholder="Enter a name here">
+      <h1>Hello, {{ yourName }}!</h1>
+    </div>
+    <hr>
+    <h2>I am not inside an AngularJS app</h2>
+    <div ng-app="embeddedAPP">
+      <h3>Inside an AngularJS app</h3>
+    </div>
+  </body>
+</html>
